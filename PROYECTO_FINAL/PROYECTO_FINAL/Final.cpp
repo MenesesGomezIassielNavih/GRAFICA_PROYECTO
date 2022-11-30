@@ -281,7 +281,7 @@ int main()
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
-	Model cohete("resources/objects/Cohete/cohete.obj");
+	
 	Model igloo("resources/objects/Igloo/igloo.obj");
 	Model grada("resources/objects/Grada/grada.obj");
 	Model torniquete("resources/objects/Torniquete/torniquete.obj");
