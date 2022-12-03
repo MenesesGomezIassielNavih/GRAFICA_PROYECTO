@@ -441,17 +441,20 @@ int main()
 		staticShader.setMat4("model", model);
 		piso.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 10.0f, 250.0f));
+
+
+		//Zona de animales de clima frio
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(330.0f, 0.0f, 350.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.8f));
+		model = glm::scale(model, glm::vec3(0.6f));
 		staticShader.setMat4("model", model);
 		igloo.Draw(staticShader);
 
 
 		//Area de Delfines
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 10.0f, 200.0f));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.01f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, -2.0f, 250.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.025f));
 		staticShader.setMat4("model", model);
 		grada.Draw(staticShader);
 
