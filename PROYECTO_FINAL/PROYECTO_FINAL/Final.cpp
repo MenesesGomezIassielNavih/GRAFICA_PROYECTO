@@ -296,6 +296,7 @@ int main()
 	Model grada("resources/objects/Grada/grada.obj");
 	Model torniquete_base("resources/objects/Torniquete/torniquete_base.obj");
 	Model torniquete_tubo("resources/objects/Torniquete/torniquete_tubo.obj");
+	Model taquilla("resources/objects/Taquilla/taquilla.obj");
 
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
@@ -454,6 +455,14 @@ int main()
 		staticShader.setMat4("model", model);
 		grada.Draw(staticShader);
 
+
+
+		//Taquilla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-317.5f, 25.0f, -342.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.0f));
+		staticShader.setMat4("model", model);
+		taquilla.Draw(staticShader);
 
 		/*Area de torniquetes Entrada
 		Torniquete base*/
