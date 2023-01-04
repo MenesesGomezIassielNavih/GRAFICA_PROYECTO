@@ -362,6 +362,12 @@ int main() {
 	Model ba("resources/objects/swing set/ba.obj");
 	Model la("resources/objects/swing set/la.obj");
 	Model di("resources/objects/swing set/di.obj");
+
+
+	Model banio("resources/objects/Banio/banio.obj");
+	Model cerca_afuera("resources/objects/Cerca/cerca2.obj");
+	Model cerca_afuera_sola("resources/objects/Cerca/cerca_sola.obj");
+
 	
 
 	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
@@ -548,6 +554,109 @@ int main() {
 		model = glm::scale(model, glm::vec3(9.0f));
 		staticShader.setMat4("model", model);
 		taquilla.Draw(staticShader);
+
+
+		//CercadeFuera_Esquina_Frente
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-425.5f, -2.0f, -372.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera.Draw(staticShader);
+
+		//CercasdeFuera_Frente
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-148.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-87.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-26.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(96.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(157.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(218.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(279.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(340.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		//CercadeFuera_Esquina_Frente
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(401.5f, -2.0f, -370.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera.Draw(staticShader);
+
+		//CercasdeFuera_izquierda
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-478.0f, -2.0f, -298.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-478.0f, -2.0f, -237.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-478.0f, -2.0f, -176.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+
+
+
+
+
+
+
 
 		/*Area de torniquetes Entrada
 		Torniquete base*/
