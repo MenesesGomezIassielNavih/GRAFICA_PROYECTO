@@ -1,1 +1,2 @@
 PROYECTO_FINAL/PROYECTO_FINAL/lib/assimp-vc141-mtd.pdb filter=lfs diff=lfs merge=lfs -text
+PROYECTO_FINAL/PROYECTO_FINAL/resources/objects/Estatuacomplemento/estatua_complemento.obj filter=lfs diff=lfs merge=lfs -text
