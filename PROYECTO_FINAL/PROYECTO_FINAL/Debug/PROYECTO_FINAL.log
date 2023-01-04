@@ -2,13 +2,14 @@
 C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
 C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(806,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(807,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(811,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(812,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(814,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(815,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(823,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(918,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(919,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(923,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(924,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(926,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(927,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\PROYECTO_FINAL\Final.cpp(935,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB '' con 'glfw3.lib(monitor.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   PROYECTO_FINAL.vcxproj -> C:\Users\Navih M\Documents\Visual Studio 2022\Proyectos\a\PROYECTO_FINAL\Debug\PROYECTO_FINAL.exe

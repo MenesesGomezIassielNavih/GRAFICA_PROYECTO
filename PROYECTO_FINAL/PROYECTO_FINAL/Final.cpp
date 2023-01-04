@@ -292,11 +292,20 @@ int main()
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
 	
+	
+	//Modelos Navih
 	Model igloo("resources/objects/Igloo/igloo.obj");
 	Model grada("resources/objects/Grada/grada.obj");
 	Model torniquete_base("resources/objects/Torniquete/torniquete_base.obj");
 	Model torniquete_tubo("resources/objects/Torniquete/torniquete_tubo.obj");
 	Model taquilla("resources/objects/Taquilla/taquilla.obj");
+	Model jardinera("resources/objects/Jardinera/jardinera.obj");
+	Model vallaConcreto("resources/objects/Valla/valla.obj");
+	Model alberca("resources/objects/Alberca/alberca.obj");
+	Model banio("resources/objects/Banio/banio.obj");
+	Model cerca_afuera("resources/objects/Cerca/cerca2.obj");
+	Model cerca_afuera_sola("resources/objects/Cerca/cerca_sola.obj");
+
 
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
@@ -442,6 +451,21 @@ int main()
 		piso.Draw(staticShader);
 
 
+		//elementos delimitantes del escenario
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-150.0f, 0.0f, -20.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		//jardinera.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, -20.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		//vallaConcreto.Draw(staticShader);
+
+		//Model jardimera("resources/objects/Jardinera/jardinera.obj");
+		//Model vallaConcreto("resources/objects/Valla/valla.obj");
 
 		//Zona de animales de clima frio
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(330.0f, 0.0f, 350.0f));
@@ -452,13 +476,41 @@ int main()
 
 
 		//Area de Delfines
+
+		//Grada
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, -2.0f, 250.0f));
 		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.025f));
 		staticShader.setMat4("model", model);
 		grada.Draw(staticShader);
 
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, -2.0f, 20.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.025f));
+		staticShader.setMat4("model", model);
+		grada.Draw(staticShader);
 
+		//valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, 0.0f, -200.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		vallaConcreto.Draw(staticShader);
+
+		//Alberca
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(420.0f, -15.0f, 8880.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(30.25f));
+		staticShader.setMat4("model", model);
+		alberca.Draw(staticShader);
+
+		//Banio
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-400.0f, 0.0f, 400.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.000075f));
+		staticShader.setMat4("model", model);
+		banio.Draw(staticShader);
+		
 
 		//Taquilla
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-317.5f, 25.0f, -342.0f));
@@ -466,6 +518,66 @@ int main()
 		model = glm::scale(model, glm::vec3(7.0f));
 		staticShader.setMat4("model", model);
 		taquilla.Draw(staticShader);
+
+
+
+		//CercadeFuera_Esquina
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-407.5f, 25.0f, -342.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.1f));
+		staticShader.setMat4("model", model);
+		cerca_afuera.Draw(staticShader);
+
+		//CercasdeFuera_Frente
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-148.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-87.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-26.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(96.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(157.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(218.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(279.5f, -2.0f, -310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
 
 		/*Area de torniquetes Entrada
 		Torniquete base*/
