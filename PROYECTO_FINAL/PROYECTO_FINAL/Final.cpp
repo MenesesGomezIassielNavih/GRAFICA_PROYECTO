@@ -361,7 +361,7 @@ int main() {
 	Model la("resources/objects/swing set/la.obj");
 	Model di("resources/objects/swing set/di.obj");
 
-
+	Model estatua("resources/objects/Estatua/estatua.obj");
 	Model banio("resources/objects/Banio/banio.obj");
 	Model cerca_afuera("resources/objects/Cerca/cerca2.obj");
 	Model cerca_afuera_sola("resources/objects/Cerca/cerca_sola.obj");
@@ -532,6 +532,13 @@ int main() {
 		model = glm::scale(model, glm::vec3(0.00015f));
 		staticShader.setMat4("model", model);
 		banio.Draw(staticShader);
+
+		//Estatua
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 0.0f, -50.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(4.0f));
+		staticShader.setMat4("model", model);
+		estatua.Draw(staticShader);
 
 
 		//Piscina
