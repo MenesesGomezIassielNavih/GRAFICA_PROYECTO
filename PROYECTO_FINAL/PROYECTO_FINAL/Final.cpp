@@ -1,4 +1,4 @@
-﻿/*---------------------------------------------------------*/
+/*---------------------------------------------------------*/
 /* ----------------  Proyecto Final              ----------*/
 /*-----------------    Equipo 4   -------------------------*/
 /*---------------------------------------------------------*/
@@ -12,6 +12,7 @@
 #include <glm/gtc/matrix_transform.hpp>	//camera y model
 #include <glm/gtc/type_ptr.hpp>
 #include <time.h>
+#include <math.h>
 
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -27,7 +28,9 @@
 #include <Skybox.h>
 #include <iostream>
 
-//#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "winmm.lib")
+
+bool sound = true;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -66,18 +69,17 @@ glm::vec3 lightDirection(0.0f, -1.0f, -1.0f);
 float	movAuto_x = 0.0f,
 movAuto_z = 0.0f,
 orienta = 0.0f,
+orienta2 = 0.0f,
 giroTorniquete_x = 0.0f,
 giroTorniquete_y = 0.0f,
 giroTorniquete_z = 0.0f;
 
-
-
 bool	animacion = false,
+		animacion2 = true, 
 		recorrido1 = true,
 		recorrido2 = false,
 		recorrido3 = false,
 		recorrido4 = false;
-
 
 //Keyframes (Manipulación y dibujo)
 float	posX = 0.0f,
@@ -91,6 +93,11 @@ float	incX = 0.0f,
 		incZ = 0.0f,
 		rotInc = 0.0f,
 		giroMonitoInc = 0.0f;
+
+//Variables para animación delfin
+float pos_x;
+float pos_y;
+float pos_z;
 
 #define MAX_FRAMES 9
 int i_max_steps = 60;
@@ -111,8 +118,7 @@ int FrameIndex = 0;			//introducir datos
 bool play = false;
 int playIndex = 0;
 
-void saveFrame(void)
-{
+void saveFrame(void){
 	//printf("frameindex %d\n", FrameIndex);
 	std::cout << "Frame Index = " << FrameIndex << std::endl;
 
@@ -179,7 +185,6 @@ void animate(void)
 
 			rotRodIzq += rotInc;
 			giroMonito += giroMonitoInc;
-	
 
 			i_curr_steps++;
 		}
@@ -190,19 +195,64 @@ void animate(void)
 	{
 		movAuto_z += 3.0f;
 	}
-}
+	
+	//Delfin
+	if (animacion2) {
+		if (recorrido1) {
+			pos_x += 0.1f;
+			pos_y += 0.1f;
+			orienta = 0.0f;
+			if (pos_y >= 30.0f) {
+				recorrido1 = false;
+				recorrido2 = true;
+			}
+		}
+		if (recorrido2) {
+			pos_x += 0.1f;
+			pos_y -= 0.001f;
+			orienta = 0.0f;
+			if (pos_x >= 60.0f) {
+				recorrido2 = false;
+				recorrido3 = true;
+			}
+		}
+		if (recorrido3) {
+			pos_x += 0.1f;
+			pos_y -= 0.1f;
+			orienta = 30.0f;
+			if (pos_y <= 0.0f) {
+				recorrido3 = false;
+				recorrido4 = true;
+			}
+		}
+		if (recorrido4) {
+			pos_x -= 0.2f;
+			pos_y = 0.0f;
+			orienta = -180.0f;
+			if (pos_x <= 0.0f) {
+				recorrido4 = false;
+				recorrido1 = true;
+			}
+		}
+	}
+		}
 
-void getResolution()
-{
-	const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+void getResolution() {
+	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
 	SCR_WIDTH = mode->width;
 	SCR_HEIGHT = (mode->height) - 80;
 }
 
+void music() {
+	if (sound) {
+		bool played = PlaySound(L"acuario.wav", NULL, SND_LOOP | SND_ASYNC);
+		sound = false;
+	}
+}
 
-int main()
-{
+
+int main() {
 	// glfw: initialize and configure
 	// ------------------------------
 	glfwInit();
@@ -264,8 +314,6 @@ int main()
 		"resources/skybox/front.jpg",
 		"resources/skybox/back.jpg"
 
-
-
 	};
 
 	Skybox skybox = Skybox(faces);
@@ -291,28 +339,36 @@ int main()
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
-	
-	
-	//Modelos Navih
+
+	//MODELOS PROYECTO
 	Model igloo("resources/objects/Igloo/igloo.obj");
 	Model grada("resources/objects/Grada/grada.obj");
 	Model torniquete_base("resources/objects/Torniquete/torniquete_base.obj");
 	Model torniquete_tubo("resources/objects/Torniquete/torniquete_tubo.obj");
 	Model taquilla("resources/objects/Taquilla/taquilla.obj");
-	Model jardinera("resources/objects/Jardinera/jardinera.obj");
-	Model vallaConcreto("resources/objects/Valla/valla.obj");
-	Model alberca("resources/objects/Alberca/alberca.obj");
-	Model banio("resources/objects/Banio/banio.obj");
-	Model cerca_afuera("resources/objects/Cerca/cerca2.obj");
-	Model cerca_afuera_sola("resources/objects/Cerca/cerca_sola.obj");
+	Model delfin("resources/objects/Delfin/delfin.obj");
+	Model colaD("resources/objects/Delfin/colaDelfin.obj");
+	Model valla("resources/objects/Valla/valla.obj");
+	Model Jardinera("resources/objects/Jardinera/jardinera.obj");
+	Model arbol("resources/objects/arbol/tree_in_OBJ.obj");
+	Model fuente("resources/objects/reloj/town clock.obj");
+	Model contorno("resources/objects/fuente/contorno.obj");
+	Model cafeteria("resources/objects/cafeteria/estructura.obj");
+	Model cafeteriaB("resources/objects/cafeteria/estructuraB.obj");
+	Model cafeteriaC("resources/objects/cafeteria/estructuraC.obj");
+	Model piscina("resources/objects/piscina/avika-curved_pool_ver1.obj");
+	Model helado("resources/objects/helado/Icecreambooth.obj");
+	Model res("resources/objects/swing set/res.obj");
+	Model ba("resources/objects/swing set/ba.obj");
+	Model la("resources/objects/swing set/la.obj");
+	Model di("resources/objects/swing set/di.obj");
+	
 
-
-
-	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
+	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
 	animacionPersonaje.initShaders(animShader.ID);
 
 	ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
-	ninja.initShaders(animShader.ID);
+	ninja.initShaders(animShader.ID);*/
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -332,7 +388,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		skyboxShader.setInt("skybox", 0);
-		
+
 		// per-frame time logic
 		// --------------------
 		lastFrame = SDL_GetTicks();
@@ -388,6 +444,8 @@ int main()
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 tmp = glm::mat4(1.0f);
 		glm::mat4 tmp2 = glm::mat4(1.0f);
+		glm::mat4 tmp3 = glm::mat4(1.0f);
+
 		// view/projection transformations
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10000.0f);
 		glm::mat4 view = camera.GetViewMatrix();
@@ -398,7 +456,6 @@ int main()
 		glm::vec3 lightColor = glm::vec3(0.6f);
 		glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
 		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.75f);
-		
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Personaje Animacion
@@ -407,7 +464,7 @@ int main()
 		animShader.use();
 		animShader.setMat4("projection", projection);
 		animShader.setMat4("view", view);
-	
+
 		animShader.setVec3("material.specular", glm::vec3(0.5f));
 		animShader.setFloat("material.shininess", 32.0f);
 		animShader.setVec3("light.ambient", ambientColor);
@@ -450,134 +507,47 @@ int main()
 		staticShader.setMat4("model", model);
 		piso.Draw(staticShader);
 
-
-		//elementos delimitantes del escenario
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-150.0f, 0.0f, -20.0f));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(5.0f));
-		staticShader.setMat4("model", model);
-		//jardinera.Draw(staticShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, -20.0f));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(5.0f));
-		staticShader.setMat4("model", model);
-		//vallaConcreto.Draw(staticShader);
-
-		//Model jardimera("resources/objects/Jardinera/jardinera.obj");
-		//Model vallaConcreto("resources/objects/Valla/valla.obj");
-
 		//Zona de animales de clima frio
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(330.0f, 0.0f, 350.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(190.0f, 0.0f, 275.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.6f));
+		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
 		igloo.Draw(staticShader);
 
-
 		//Area de Delfines
-
-		//Grada
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, -2.0f, 250.0f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.025f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(40.0f, -2.0f, 210.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.023f));
 		staticShader.setMat4("model", model);
 		grada.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, -2.0f, 20.0f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.025f));
+		//Piscina
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-115.0f, 12.0f, 315.0f));
+		model = glm::scale(model, glm::vec3(17.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		piscina.Draw(staticShader);
+
+		//Reloj
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 30.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(17.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		fuente.Draw(staticShader);
+
+		//GRADA 2
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-230.0f, -2.0f, 210.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.023f));
 		staticShader.setMat4("model", model);
 		grada.Draw(staticShader);
-
-		//valla
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, 0.0f, -200.0f));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(5.0f));
-		staticShader.setMat4("model", model);
-		vallaConcreto.Draw(staticShader);
-
-		//Alberca
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(420.0f, -15.0f, 8880.0f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(30.25f));
-		staticShader.setMat4("model", model);
-		alberca.Draw(staticShader);
-
-		//Banio
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-400.0f, 0.0f, 400.0f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.000075f));
-		staticShader.setMat4("model", model);
-		banio.Draw(staticShader);
-		
 
 		//Taquilla
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-317.5f, 25.0f, -342.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-322.5f, 25.0f, -342.0f));
 		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(7.0f));
+		model = glm::scale(model, glm::vec3(9.0f));
 		staticShader.setMat4("model", model);
 		taquilla.Draw(staticShader);
-
-
-
-		//CercadeFuera_Esquina
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-407.5f, 25.0f, -342.0f));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f));
-		staticShader.setMat4("model", model);
-		cerca_afuera.Draw(staticShader);
-
-		//CercasdeFuera_Frente
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-148.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-87.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-26.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(96.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(157.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(218.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(279.5f, -2.0f, -310.0f));
-		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f));
-		staticShader.setMat4("model", model);
-		cerca_afuera_sola.Draw(staticShader);
-
 
 		/*Area de torniquetes Entrada
 		Torniquete base*/
@@ -694,14 +664,236 @@ int main()
 		staticShader.setMat4("model", model);
 		torniquete_tubo.Draw(staticShader);
 
+		//DELFIN
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(pos_x, pos_y, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		tmp3 = model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 0.0f, 1.0f));
 
-
-
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -70.0f));
-		model = glm::scale(model, glm::vec3(5.0f));
+		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
-		//casaVieja.Draw(staticShader);
+		delfin.Draw(staticShader);
+
+		model = glm::translate(tmp3, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f));
+		staticShader.setMat4("model", model);
+		colaD.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-104.7f, -1.70f, -335.0f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(42.0f, -1.80f, -335.0f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(187.0f, -1.70f, -335.0f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(333.0f, -1.80f, -335.0f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(402.0f, -1.70f, -258.0f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(402.0f, -1.80f, -111.5f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(402.0f, -1.70f, 33.5f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(402.0f, -1.80f, 180.5f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(402.0f, -1.70f, 326.0f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(333.0f, -1.80f, 403.0f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(187.0f, -1.70f, 403.0f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(42.0f, -1.80f, 403.0f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-104.7f, -1.70f, 403.0f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-250.0f, -1.80f, 403.0f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-396.5f, -1.70f, 403.0f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-473.0f, -1.80f, 334.5f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-473.0f, -1.70f, 188.2f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-473.0f, -1.80f, 42.7f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Valla
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-473.0f, -1.70f, -104.7f));
+		model = glm::scale(model, glm::vec3(16.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		valla.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-473.0f, -1.80f, -250.2f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Jardinera
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-403.8f, -1.70f, -335.0f));
+		model = glm::scale(model, glm::vec3(11.0f));
+		staticShader.setMat4("model", model);
+		Jardinera.Draw(staticShader);
+
+		//Arbol
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-465.0f, 0.0f, -325.0f));
+		model = glm::scale(model, glm::vec3(6.5f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		arbol.Draw(staticShader);
+
+		//Cafeteria estructura
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-445.0f, 0.0f, -250.0f));
+		model = glm::scale(model, glm::vec3(20.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		cafeteria.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-445.0f, 0.0f, -250.0f));
+		model = glm::scale(model, glm::vec3(20.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		cafeteriaB.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-445.0f, 0.0f, -250.0f));
+		model = glm::scale(model, glm::vec3(20.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		cafeteriaC.Draw(staticShader);
+
+		//Puesto de helado
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-430.0f, 0.0f, 310.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(23.0f));
+		staticShader.setMat4("model", model);
+		helado.Draw(staticShader);
+
+		//Juegos
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-400.0f, 0.0f, 130.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		res.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-400.0f, 0.0f, 130.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		ba.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-400.0f, 0.0f, 130.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		la.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-400.0f, 0.0f, 130.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		di.Draw(staticShader);
+
+		//Juegos
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-450.0f, 0.0f, -20.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		res.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-450.0f, 0.0f, -20.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		ba.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-450.0f, 0.0f, -20.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		la.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-450.0f, 0.0f, -20.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		di.Draw(staticShader);
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carro
@@ -868,6 +1060,12 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 	//Car animation
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 		animacion ^= true;
+
+	if (glfwGetKey(window, GLFW_KEY_3 )== GLFW_PRESS)
+		animacion2 ^= true;
+
+	if (key == GLFW_KEY_O && action == GLFW_PRESS)
+		music();
 
 	//To play KeyFrame animation 
 	if (key == GLFW_KEY_P && action == GLFW_PRESS)
