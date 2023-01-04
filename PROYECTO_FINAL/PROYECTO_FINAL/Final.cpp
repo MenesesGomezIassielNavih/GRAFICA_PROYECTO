@@ -47,7 +47,7 @@ GLFWmonitor *monitors;
 void getResolution(void);
 
 // camera
-Camera camera(glm::vec3(0.0f, 10.0f, 90.0f));
+Camera camera(glm::vec3(-400.0f, 50.0f, -500.0f));
 float MovementSpeed = 0.1f;
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
@@ -526,6 +526,15 @@ int main() {
 		model = glm::scale(model, glm::vec3(0.023f));
 		staticShader.setMat4("model", model);
 		grada.Draw(staticShader);
+
+
+		//Banio
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 0.0f, -260.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.00015f));
+		staticShader.setMat4("model", model);
+		banio.Draw(staticShader);
+
 
 		//Piscina
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-115.0f, 12.0f, 315.0f));
