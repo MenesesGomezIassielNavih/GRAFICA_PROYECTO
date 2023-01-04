@@ -350,9 +350,7 @@ int main() {
 	Model colaD("resources/objects/Delfin/colaDelfin.obj");
 	Model valla("resources/objects/Valla/valla.obj");
 	Model Jardinera("resources/objects/Jardinera/jardinera.obj");
-	Model arbol("resources/objects/arbol/tree_in_OBJ.obj");
-	Model fuente("resources/objects/reloj/town clock.obj");
-	Model contorno("resources/objects/fuente/contorno.obj");
+	Model arbol("resources/objects/arbol/tree_in_OBJ.obj");;
 	Model cafeteria("resources/objects/cafeteria/estructura.obj");
 	Model cafeteriaB("resources/objects/cafeteria/estructuraB.obj");
 	Model cafeteriaC("resources/objects/cafeteria/estructuraC.obj");
@@ -543,12 +541,7 @@ int main() {
 		staticShader.setMat4("model", model);
 		piscina.Draw(staticShader);
 
-		//Reloj
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 30.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(17.0f));
-		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		staticShader.setMat4("model", model);
-		fuente.Draw(staticShader);
+
 
 		//GRADA 2
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-230.0f, -2.0f, 210.0f));
@@ -783,7 +776,7 @@ int main() {
 		torniquete_tubo.Draw(staticShader);
 
 		//DELFIN
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(pos_x, pos_y, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(pos_x - 150.0f, pos_y, 200.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		tmp3 = model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 0.0f, 1.0f));
