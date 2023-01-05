@@ -362,7 +362,7 @@ int main() {
 	Model di("resources/objects/swing set/di.obj");
 
 	Model estatua("resources/objects/Estatua/estatua.obj");
-	Model banio("resources/objects/Banio/banio.obj");
+	Model banio("resources/objects/Banio2/banio2.obj");
 	Model cerca_afuera("resources/objects/Cerca/cerca2.obj");
 	Model cerca_afuera_sola("resources/objects/Cerca/cerca_sola.obj");
 
@@ -529,7 +529,7 @@ int main() {
 		//Banio
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 0.0f, -260.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.00015f));
+		model = glm::scale(model, glm::vec3(0.015f));
 		staticShader.setMat4("model", model);
 		banio.Draw(staticShader);
 
