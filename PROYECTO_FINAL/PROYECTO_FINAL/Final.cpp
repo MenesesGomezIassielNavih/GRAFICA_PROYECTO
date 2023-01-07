@@ -370,6 +370,7 @@ int main() {
 	Model muro_puerta("resources/objects/Puerta/puerta.obj");
 	Model puertaI("resources/objects/Puerta/puerta_izquierda.obj");
 	Model puertaD("resources/objects/Puerta/puerta_derecha.obj");
+	Model vegetacion("resources/objects/Vegetacion/vegetacion.obj");
 
 
 	
@@ -571,6 +572,37 @@ int main() {
 		staticShader.setMat4("model", model);
 		taquilla.Draw(staticShader);
 
+
+		//Vegetacion
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-570.0f, -72.0f, -380.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(110.0f));
+		staticShader.setMat4("model", model);
+		vegetacion.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-350.0f, -72.0f, -380.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(110.0f));
+		staticShader.setMat4("model", model);
+		vegetacion.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, -72.0f, -380.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(110.0f));
+		staticShader.setMat4("model", model);
+		vegetacion.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-50.0f, -72.0f, -380.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(110.0f));
+		staticShader.setMat4("model", model);
+		vegetacion.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, -72.0f, -380.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(110.0f));
+		staticShader.setMat4("model", model);
+		vegetacion.Draw(staticShader);
 
 		//CercadeFuera_Esquina_Frente
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-460.0f, -2.0f, -422.0f));
