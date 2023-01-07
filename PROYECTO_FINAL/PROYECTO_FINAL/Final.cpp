@@ -72,7 +72,8 @@ orienta = 0.0f,
 orienta2 = 0.0f,
 giroTorniquete_x = 0.0f,
 giroTorniquete_y = 0.0f,
-giroTorniquete_z = 0.0f;
+giroTorniquete_z = 0.0f,
+giroPuerta_x = 0.0f;
 
 bool	animacion = false,
 		animacion2 = true, 
@@ -973,16 +974,17 @@ int main() {
 		staticShader.setMat4("model", model);
 		valla.Draw(staticShader);
 
+
 		//puerta1
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-310.5f, -7.0f, -445.0f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(-giroPuerta_x), glm::vec3(0.0f, -0.1f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.5f));
 		staticShader.setMat4("model", model);
 		puertaI.Draw(staticShader);
 
 		//puerta2
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-310.5f, -7.0f, -445.0f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(giroPuerta_x), glm::vec3(0.0f, -0.1f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.5f));
 		staticShader.setMat4("model", model);
 		puertaD.Draw(staticShader);
@@ -994,7 +996,8 @@ int main() {
 		staticShader.setMat4("model", model);
 		muro_puerta.Draw(staticShader);
 
-	
+		
+
 
 		//Jardinera
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(333.0f, -1.80f, -335.0f));
@@ -1356,6 +1359,10 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		giroTorniquete_x++;
 	if (glfwGetKey(window, GLFW_KEY_2 )== GLFW_PRESS)
 		giroTorniquete_x--;
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		giroPuerta_x++;
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+		giroPuerta_x--;
 	//Car animation
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 		animacion ^= true;
