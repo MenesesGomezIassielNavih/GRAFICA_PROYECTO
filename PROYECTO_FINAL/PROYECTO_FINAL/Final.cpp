@@ -571,6 +571,13 @@ int main() {
 		staticShader.setMat4("model", model);
 		acuario_vidrio.Draw(staticShader);
 
+		//glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //todo lo que este debajo de glblend es afectado y da semi trasnparencia
+		//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		//glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0f, 1.0f, 1.0f, 0.75f);
+		//acuario_vidrio.Draw(lightingShader);
+		//glDisable(GL_BLEND);  //Desactiva el canal alfa
+
 
 		//GRADA 2
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-230.0f, -2.0f, 210.0f));
@@ -779,6 +786,12 @@ int main() {
 		staticShader.setMat4("model", model);
 		cerca_afuera_sola.Draw(staticShader);
 
+		//CercadeFuera_Esquina_atras
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-462.0f, -2.0f, 440.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera.Draw(staticShader);
 
 		//CercasdeFuera_derecha
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(399.5f, -2.0f, -348.0f));
@@ -859,12 +872,94 @@ int main() {
 		staticShader.setMat4("model", model);
 		cerca_afuera_sola.Draw(staticShader);
 
+		//CercadeFuera_Esquina_atras
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(399.5f, -2.0f, 445.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera.Draw(staticShader);
 
 
+		//CercasdeFuera_atras
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(340.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
 
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(297.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
 
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(218.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
 
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(157.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
 
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(96.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-26.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-87.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-148.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-209.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-270.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-331.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-392.5f, -2.0f, 496.0f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.25f));
+		staticShader.setMat4("model", model);
+		cerca_afuera_sola.Draw(staticShader);
+
+	
 
 		/*Area de torniquetes Entrada
 		Torniquete base*/
