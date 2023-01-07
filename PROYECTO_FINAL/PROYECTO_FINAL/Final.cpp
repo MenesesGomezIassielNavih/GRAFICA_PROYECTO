@@ -371,6 +371,8 @@ int main() {
 	Model puertaI("resources/objects/Puerta/puerta_izquierda.obj");
 	Model puertaD("resources/objects/Puerta/puerta_derecha.obj");
 	Model vegetacion("resources/objects/Vegetacion/vegetacion.obj");
+	Model acuario("resources/objects/Acuario/acuario.obj");
+	Model acuario_vidrio("resources/objects/Acuario/acuario_vidrio.obj");
 
 
 	
@@ -555,6 +557,19 @@ int main() {
 		staticShader.setMat4("model", model);
 		piscina.Draw(staticShader);
 
+		//Acuario
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-150.0f, -220.0f, -1400.0f));
+		model = glm::scale(model, glm::vec3(300.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		acuario.Draw(staticShader);
+
+		//Acuario vidrio
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-150.0f, -220.0f, -1400.0f));
+		model = glm::scale(model, glm::vec3(300.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		acuario_vidrio.Draw(staticShader);
 
 
 		//GRADA 2
